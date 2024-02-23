@@ -1,0 +1,5 @@
+.pages-wrapper {
+    display: flex;
+    background: #ededed;
+    padding: .25rem;
+}

@@ -1,0 +1,20 @@
+.grid-header { grid-area: header; }
+.grid-menu { grid-area: menu; }
+.grid-tool { grid-area: tool; }
+.grid-whiteboard { grid-area: right; }
+
+.grid-container {
+    display: grid;
+    grid-template-areas:
+    'header header header header header header'
+    'menu main main main right right';
+    background-color: #2196F3;
+    padding: 1rem;
+}
+
+.grid-container > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+}

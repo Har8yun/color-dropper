@@ -1,0 +1,7 @@
+.app-toolbar {
+    width: 4rem;
+    height: 100vh;
+    background: #f7f7f7;
+    border-right: 5px;
+    margin-right: .2rem;
+}

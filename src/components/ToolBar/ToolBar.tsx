@@ -8,9 +8,9 @@ import ColorLensIcon from "@mui/icons-material/ColorLens";
 import {useNavigate} from "react-router-dom";
 import {APP_ROUTER} from "../../context/constants";
 import HomeIcon from '@mui/icons-material/Home';
-import Box from "@mui/material/Box";
-import "./ToolBar.css";
 import {Paper} from "@mui/material";
+
+import "./ToolBar.css";
 
 const ToolBar = () => {
     const navigate = useNavigate();

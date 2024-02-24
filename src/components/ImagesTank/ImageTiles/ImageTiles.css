@@ -1,0 +1,9 @@
+.image-tiles {
+    margin-top: 2rem;
+}
+
+.image-thumb {
+    width: 48%;
+    margin: 2px;
+    border-radius: 5px;
+}

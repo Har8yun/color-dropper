@@ -1,14 +1,20 @@
 import {ImagePexelsType} from "./types";
 import Box from "@mui/material/Box";
+import {useContext} from "react";
+import {ImageContext} from "../../../context/ImageContextProvider";
 
 type MasonryImagesTypes = {
     images: ImagePexelsType[]
 };
 
 const MasonryImages = ({images}: MasonryImagesTypes) => {
-    const halfIndex = Math.ceil(images.length / 2);
-    const firstGroup = images.slice(0, halfIndex);
-    const secondGroup = images.slice(halfIndex);
+    const thirdIndex = Math.ceil(images.length / 3);
+    const firstGroup = images.slice(0, thirdIndex);
+    const secondIndex = 2 * thirdIndex;
+    const secondGroup = images.slice(thirdIndex, secondIndex);
+    const thirdGroup = images.slice(secondIndex);
+
+    const {setSelectedImage} = useContext(ImageContext);
 
     return (
         <Box className="simple-masonry">
@@ -21,6 +27,7 @@ const MasonryImages = ({images}: MasonryImagesTypes) => {
                             alt={image.alt}
                             key={image.id}
                             src={image.src.medium}
+                            onClick={() => setSelectedImage(image.src.large)}
                         />
                     );
                 })}
@@ -34,6 +41,21 @@ const MasonryImages = ({images}: MasonryImagesTypes) => {
                             alt={image.alt}
                             key={image.id}
                             src={image.src.medium}
+                            onClick={() => setSelectedImage(image.src.large)}
+                        />
+                    );
+                })}
+            </Box>
+            <Box className="masonry-column">
+                {thirdGroup.map(image => {
+                    return (
+                        <img
+                            loading="lazy"
+                            className="image-thumb"
+                            alt={image.alt}
+                            key={image.id}
+                            src={image.src.medium}
+                            onClick={() => setSelectedImage(image.src.large)}
                         />
                     );
                 })}

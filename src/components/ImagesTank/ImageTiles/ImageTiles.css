@@ -4,16 +4,21 @@
 
 .simple-masonry {
     display: flex;
-    justify-content: space-between;
+    gap: 4px;
 }
 
 .masonry-column {
-    width: 49%;
+    flex-grow: 1;
+    width: 33%;
 }
 
 .image-thumb {
     width: 100%;
     height: auto;
-    margin-bottom: 2px;
+    margin: 0 0 4px 0;
     border-radius: 5px;
+}
+.image-thumb:hover {
+    opacity: 0.7;
+    cursor: pointer;
 }

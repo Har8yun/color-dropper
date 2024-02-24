@@ -6,11 +6,14 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import AppRouter from "./router/AppRouter";
 import {BrowserRouter} from 'react-router-dom';
+import {ImageContextProvider} from "./context/ImageContextProvider";
 
 function App() {
     return (
         <BrowserRouter>
-            <AppRouter/>
+            <ImageContextProvider>
+                <AppRouter/>
+            </ImageContextProvider>
         </BrowserRouter>
     );
 }

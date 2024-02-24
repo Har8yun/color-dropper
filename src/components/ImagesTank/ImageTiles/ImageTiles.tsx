@@ -2,16 +2,8 @@ import React from 'react';
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import "./ImageTiles.css";
-
-type ImagePexelsType = {
-    id: number,
-    alt: string,
-    src: {
-        medium: string,
-        small: string,
-        tiny: string,
-    }
-};
+import {ImagePexelsType} from "./types";
+import MasonryImages from "./MasonryImages";
 
 const ImageTiles = ({images, isLoading}: { images: ImagePexelsType[], isLoading: Boolean }) => {
     return (
@@ -24,17 +16,7 @@ const ImageTiles = ({images, isLoading}: { images: ImagePexelsType[], isLoading:
                     ?
                     "...Images are Loading"
                     :
-                    images.map(image => {
-                        return (
-                            <img
-                                loading="lazy"
-                                className="image-thumb"
-                                alt={image.alt}
-                                key={image.id}
-                                src={image.src.medium}
-                            />
-                        );
-                    })
+                    <MasonryImages images={images} />
                 }
             </Box>
         </Box>

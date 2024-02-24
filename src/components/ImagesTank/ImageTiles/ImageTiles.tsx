@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import "./ImageTiles.css";
 import {ImagePexelsType} from "./types";
 import MasonryImages from "./MasonryImages";
+import {CircularProgress} from "@mui/material";
 
 const ImageTiles = ({images, isLoading}: { images: ImagePexelsType[], isLoading: Boolean }) => {
     return (
@@ -11,14 +12,14 @@ const ImageTiles = ({images, isLoading}: { images: ImagePexelsType[], isLoading:
             <Typography variant="h6">
                 Library
             </Typography>
-            <Box>
-                {isLoading
-                    ?
-                    "...Images are Loading"
-                    :
-                    <MasonryImages images={images} />
-                }
-            </Box>
+            {isLoading
+                ?
+                <Box sx={{textAlign: "center"}}>
+                    <CircularProgress  color="secondary" />
+                </Box>
+                :
+                <MasonryImages images={images} />
+            }
         </Box>
     );
 };

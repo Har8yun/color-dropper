@@ -28,7 +28,9 @@ export const useImagesTank = () => {
     const changeHandler = debouncedChangeHandler((ev: React.ChangeEvent<HTMLInputElement>) => {
         const {value} = ev.target;
 
-        searchPhotos(value)
+        const requestFn = value ? searchPhotos(value) : getPhotos();
+
+        requestFn
             .then((res) => {
                 setImages(res.photos)
             })

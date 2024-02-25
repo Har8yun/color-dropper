@@ -27,7 +27,7 @@ const MasonryImages = ({images}: MasonryImagesTypes) => {
                             alt={image.alt}
                             key={image.id}
                             src={image.src.medium}
-                            onClick={() => setSelectedImage(image.src.large)}
+                            onClick={() => setSelectedImage(image.src.original)}
                         />
                     );
                 })}
@@ -41,7 +41,7 @@ const MasonryImages = ({images}: MasonryImagesTypes) => {
                             alt={image.alt}
                             key={image.id}
                             src={image.src.medium}
-                            onClick={() => setSelectedImage(image.src.large)}
+                            onClick={() => setSelectedImage(image.src.original)}
                         />
                     );
                 })}
@@ -55,7 +55,7 @@ const MasonryImages = ({images}: MasonryImagesTypes) => {
                             alt={image.alt}
                             key={image.id}
                             src={image.src.medium}
-                            onClick={() => setSelectedImage(image.src.large)}
+                            onClick={() => setSelectedImage(image.src.original)}
                         />
                     );
                 })}

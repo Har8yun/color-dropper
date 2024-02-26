@@ -1,3 +1,7 @@
+.selected-color-container {
+    margin: 1rem auto;
+}
+
 .selected-color {
     width: 25px;
     height: 25px;

@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 import "./SelectedColor.css";
 
 const SelectedColor = memo(() => {
-    const { selectedColor } = useContext(ImageContext);
+    const {selectedColor} = useContext(ImageContext);
 
     return (
         <FormControl size="small" variant="filled" fullWidth>
@@ -17,17 +17,16 @@ const SelectedColor = memo(() => {
                 value={selectedColor}
                 id="current-color"
                 type="text"
-
                 label="Current Color"
                 InputProps={{
                     startAdornment: (
                         <InputAdornment position="start">
-                            <TagIcon />
+                            <TagIcon/>
                         </InputAdornment>
                     ),
                     endAdornment: (
                         <InputAdornment position="start">
-                            <Box className="selected-color" sx={{ backgroundColor: selectedColor}} />
+                            <Box className="selected-color" sx={{backgroundColor: selectedColor}}/>
                         </InputAdornment>
                     ),
                 }}

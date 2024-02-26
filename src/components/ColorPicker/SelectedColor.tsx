@@ -36,10 +36,10 @@ const SelectedColor = memo(() => {
                 />
             </FormControl>
 
-            <Typography variant="h6" sx={{textAlign: "center", marginTop: "1rem"}}>
+            <Typography variant="h6" className="selected-color-title">
                 Text example with current color
             </Typography>
-            <Typography style={{color: selectedColor, border: "1px solid #efefef"}}>
+            <Typography className="selected-color-text" style={{color: selectedColor}}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Sed nec imperdiet urna, sit amet ultricies massa. Suspendisse
                 tempus ornare dui. Aliquam erat volutpat. Vivamus porttitor maximus laoreet.

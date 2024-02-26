@@ -8,3 +8,14 @@
     border: 1px solid #efefef;
     border-radius: 4px;
 }
+
+.selected-color-title {
+    text-align: center;
+    margin: 1rem auto;
+}
+
+.selected-color-text {
+    border: 1px solid #efefef;
+    text-align: justify;
+    padding: 4px
+}

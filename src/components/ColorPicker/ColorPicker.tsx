@@ -5,6 +5,7 @@ import SelectedColor from "./SelectedColor";
 import ProColorPicker from "./ProColorPicker";
 import {useContext, useEffect} from "react";
 import {ImageContext} from "../../context/ImageContextProvider";
+import AdvancedDropper from "./AdvancedDropper";
 
 const ColorPicker = () => {
     const {setIsColorDropperActive} = useContext(ImageContext);
@@ -23,6 +24,8 @@ const ColorPicker = () => {
             <DefaultColorPicker/>
 
             <ProColorPicker/>
+
+            <AdvancedDropper />
 
             <SelectedColor/>
         </ToolWrapper>

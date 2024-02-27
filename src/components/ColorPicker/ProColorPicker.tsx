@@ -6,7 +6,7 @@ import {ImageContext} from "../../context/ImageContextProvider";
 
 const ProColorPicker = () => {
     const {isColorDropperActive, setIsColorDropperActive} = useContext(ImageContext);
-    const iconClickHandler = () => setIsColorDropperActive(isActive => !isActive);
+    const clickHandler = () => setIsColorDropperActive(isActive => !isActive);
 
     return (
         <Box sx={{marginBottom: "1rem"}}>
@@ -14,9 +14,10 @@ const ProColorPicker = () => {
                 color={isColorDropperActive ? "error" : "primary"}
                 variant={isColorDropperActive ? "contained" : "outlined"}
                 aria-label="color dropper"
-                onClick={iconClickHandler}
+                onClick={clickHandler}
+                startIcon={<ColorizeIcon/>}
             >
-                <ColorizeIcon/> Pro Color Picker
+                Pro Color Picker
             </Button>
         </Box>
     );

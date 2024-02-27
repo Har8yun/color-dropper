@@ -11,6 +11,8 @@ interface IImageContext {
     setIsColorDropperActive: Dispatch<SetStateAction<boolean>>;
     selectedColor: string,
     setSelectedColor: Dispatch<SetStateAction<string>>;
+    isAdvancedDropper: boolean,
+    setIsAdvancedDropper: Dispatch<SetStateAction<boolean>>;
 }
 
 export const ImageContext = createContext<IImageContext>({
@@ -20,13 +22,16 @@ export const ImageContext = createContext<IImageContext>({
     setIsColorDropperActive: () => {},
     selectedColor: "",
     setSelectedColor: () => {},
-
+    isAdvancedDropper: false,
+    setIsAdvancedDropper: () => {},
 })
 
 export const ImageContextProvider = ({children}: ImageContextProviderType) => {
+    // TODO - make reducer
     const [selectedImage, setSelectedImage] = useState("");
     const [selectedColor, setSelectedColor] = useState("#fefefe");
     const [isColorDropperActive, setIsColorDropperActive] = useState(false);
+    const [isAdvancedDropper, setIsAdvancedDropper] = useState(false);
 
     return (
         <ImageContext.Provider
@@ -37,6 +42,8 @@ export const ImageContextProvider = ({children}: ImageContextProviderType) => {
                 setSelectedColor,
                 isColorDropperActive,
                 setIsColorDropperActive,
+                isAdvancedDropper,
+                setIsAdvancedDropper,
             }}>
             {children}
         </ImageContext.Provider>

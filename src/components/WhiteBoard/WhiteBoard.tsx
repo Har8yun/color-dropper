@@ -4,10 +4,9 @@ import {CANVAS_SIZE, CANVAS_WIDTH} from "../../constants/constants";
 import {useColorDetector} from "./hooks/useColorDetector";
 import {useColorChooser} from "./hooks/useColorChooser";
 import {useImageSelector} from "./hooks/useImageSelector";
+import {useCursorBuilder} from "./hooks/useCursorBuilder";
 
 import "./WhiteBoard.css";
-import {ImageContext} from "../../context/ImageContextProvider";
-import {useCursorBuilder} from "./hooks/useCursorBuilder";
 
 const WhiteBoard = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);

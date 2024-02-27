@@ -1,6 +1,5 @@
-import {CENTER_INDEX, PICKER_SIZE, RECT_SIZE} from "../constants/constants";
+import {CENTER_INDEX, CIRCLE_R, CIRCLE_RECT_R, PICKER_SIZE, RECT_SIZE} from "../constants/constants";
 
-// TODO - hide rects out of circle
 export const getCursor = (fill = "#efefef", colors: string[] = []) => {
     console.log("fill", fill)
     let allRects = "";
@@ -11,7 +10,8 @@ export const getCursor = (fill = "#efefef", colors: string[] = []) => {
             const isCenter = x === y && x === CENTER_INDEX;
             const stroke =  isCenter ? "black" : "grey";
             const strokeWidth =  isCenter ? 2 : 1;
-            const visibility = x === 0 || y === 0 || x === (PICKER_SIZE - RECT_SIZE) || y === (PICKER_SIZE - RECT_SIZE) ? "hidden" : "visible";
+            const visibleRectCurrentR = ((CENTER_INDEX - x)**2 + (CENTER_INDEX - y)**2)**(1/2);
+            const visibility = visibleRectCurrentR < CIRCLE_RECT_R ? "visible" : "hidden";// = x === 0 || y === 0 || x === (PICKER_SIZE - RECT_SIZE) || y === (PICKER_SIZE - RECT_SIZE) ? "hidden" : "visible";
 
             if (isCenter) {
                 centerRect +=`<rect x="${x}" y="${y}" stroke-width="${strokeWidth}" stroke="${stroke}" width="${RECT_SIZE}" height="${RECT_SIZE}" fill="${colors[i] ?? 'transparent'}" />`;
@@ -32,9 +32,9 @@ export const getCursor = (fill = "#efefef", colors: string[] = []) => {
         >
             ${allRects}
             ${centerRect}
-            <circle r="80" cx="90" cy="90" stroke="${fill}" stroke-width="20" fill="transparent" />
-            <circle r="72" cx="90" cy="90" stroke="#efefef" stroke-width="4" fill="transparent" />
-            <circle r="88" cx="90" cy="90" stroke="#efefef" stroke-width="4" fill="transparent" />
+            <circle r="84" cx="${CIRCLE_R}" cy="${CIRCLE_R}" stroke="${fill}" stroke-width="${RECT_SIZE}" fill="transparent" />
+            <circle r="79" cx="${CIRCLE_R}" cy="${CIRCLE_R}" stroke="#efefef" stroke-width="2" fill="transparent" />
+            <circle r="89" cx="${CIRCLE_R}" cy="${CIRCLE_R}" stroke="#efefef" stroke-width="2" fill="transparent" />
         </svg>`
     );
 

@@ -1,4 +1,4 @@
-import {useContext, useRef} from "react";
+import {useRef} from "react";
 import Box from "@mui/material/Box";
 import {CANVAS_SIZE, CANVAS_WIDTH} from "../../constants/constants";
 import {useColorDetector} from "./hooks/useColorDetector";
@@ -11,10 +11,9 @@ import {useCursorBuilder} from "./hooks/useCursorBuilder";
 
 const WhiteBoard = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const {isColorDropperActive} = useContext(ImageContext);
     const { hoveredColor, colors } = useColorDetector(canvasRef.current);
     const { selectedColor } = useColorChooser(canvasRef.current);
-    const cursorString = useCursorBuilder(isColorDropperActive, selectedColor, colors)
+    const cursorString = useCursorBuilder(selectedColor, colors)
     useImageSelector(canvasRef.current);
 
     return (

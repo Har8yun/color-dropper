@@ -3,7 +3,7 @@ import {pickColor} from "../../../utils/colorHelper";
 
 export const useColorDetector = (canvas: HTMLCanvasElement | null) => {
     const [hoveredColor, setHoveredColor] = useState("");
-    const [colors, setColors] = useState([]);
+    const [colors, setColors] = useState<string[]>([]);
 
     useEffect(() => {
         if (canvas) {

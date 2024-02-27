@@ -8,8 +8,8 @@ export const useColorChooser = (canvas: HTMLCanvasElement | null) => {
     useEffect(() => {
         if (canvas) {
             canvas.addEventListener("click", (ev: MouseEvent) => {
-                const rgbColor = pickColor(ev, canvas);
-                setSelectedColor(rgbColor);
+                const {centerColor} = pickColor(ev, canvas);
+                setSelectedColor(centerColor);
             });
         }
     }, [canvas, setSelectedColor])

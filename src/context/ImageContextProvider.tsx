@@ -25,7 +25,7 @@ export const ImageContext = createContext<IImageContext>({
 
 export const ImageContextProvider = ({children}: ImageContextProviderType) => {
     const [selectedImage, setSelectedImage] = useState("");
-    const [selectedColor, setSelectedColor] = useState("");
+    const [selectedColor, setSelectedColor] = useState("#fefefe");
     const [isColorDropperActive, setIsColorDropperActive] = useState(false);
 
     return (

@@ -1,4 +1,4 @@
-import {rgbToHex} from "../cursor/helpers";
+import {RECT_COUNT} from "../constants/constants";
 
 enum ColorFormats {
     HEX,
@@ -12,17 +12,23 @@ export function pickColor(ev: MouseEvent, canvas: HTMLCanvasElement, colorFormat
     const ctx = canvas.getContext("2d");
 
     if (ctx) {
-        const pixel = ctx.getImageData(x, y, 1, 1);
-        const data = pixel.data;
+        const pixelRect = ctx.getImageData(x, y, RECT_COUNT, RECT_COUNT);
 
-        if (colorFormat === ColorFormats.RGBA) {
-            return `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3] / 255})`;
+        const colors = [];
+        const {data: rectData} = pixelRect;
+        for (let i = 0; i < rectData.length; i +=4) {
+            const currentColor = `rgba(${rectData[i]}, ${rectData[i+1]}, ${rectData[i+2]}, ${rectData[i+3] / 255})`;
+            colors.push(currentColor);
         }
 
-        if (colorFormat === ColorFormats.HEX) {
-            return rgbToHex(data[0], data[1], data[2]);
-        }
+        return {
+            colorsSet: colors,
+            centerColor: colors[Math.floor(colors.length / 2)]
+        };
     }
 
-    return "";
+    return {
+        colorsSet: [],
+        centerColor: ""
+    };
 }

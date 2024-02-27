@@ -1,19 +1,29 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {pickColor} from "../../../utils/colorHelper";
+import {ImageContext} from "../../../context/ImageContextProvider";
 
 export const useColorDetector = (canvas: HTMLCanvasElement | null) => {
     const [hoveredColor, setHoveredColor] = useState("");
+    const {isColorDropperActive} = useContext(ImageContext);
     const [colors, setColors] = useState<string[]>([]);
 
     useEffect(() => {
-        if (canvas) {
-            canvas.addEventListener("mousemove", (ev: MouseEvent) => {
+        const handler = (ev: MouseEvent) => {
+            if (canvas) {
                 const {centerColor, colorsSet} = pickColor(ev, canvas);
                 setHoveredColor(centerColor);
                 setColors(colorsSet);
-            });
+            }
+        };
+
+        if (canvas && isColorDropperActive) {
+            canvas.addEventListener("mousemove", handler);
         }
-    }, [canvas])
+
+        return () => {
+            canvas?.removeEventListener("mousemove", handler);
+        }
+    }, [canvas, isColorDropperActive])
 
     return {
         hoveredColor,

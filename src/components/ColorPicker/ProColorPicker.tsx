@@ -6,9 +6,7 @@ import {ImageContext} from "../../context/ImageContextProvider";
 
 const ProColorPicker = () => {
     const {isColorDropperActive, setIsColorDropperActive} = useContext(ImageContext);
-    const iconClickHandler = () => {
-        setIsColorDropperActive(isActive => !isActive);
-    };
+    const iconClickHandler = () => setIsColorDropperActive(isActive => !isActive);
 
     return (
         <Box sx={{marginBottom: "1rem"}}>

@@ -1,7 +1,7 @@
 import {useRef} from "react";
 import Box from "@mui/material/Box";
 import {getCursor} from "../../cursor/Cursor";
-import {CANVAS_SIZE} from "../../constants/constants";
+import {CANVAS_SIZE, CANVAS_WIDTH} from "../../constants/constants";
 import {useColorDetector} from "./hooks/useColorDetector";
 import {useColorChooser} from "./hooks/useColorChooser";
 import {useImageSelector} from "./hooks/useImageSelector";
@@ -21,8 +21,8 @@ const WhiteBoard = () => {
                 style={{
                     backgroundColor: "#fff",
                     cursor: `url("${cursorString}") 64 64, default`,
-                    width: `${CANVAS_SIZE}px`,
-                    height: `${CANVAS_SIZE}px`,
+                    width: `${CANVAS_WIDTH}px`,
+                    height: `${CANVAS_WIDTH}px`,
                 }}
                 ref={canvasRef}
                 width={CANVAS_SIZE}

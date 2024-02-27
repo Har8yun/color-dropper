@@ -1,14 +1,14 @@
-import {RECT_COUNT} from "../constants/constants";
+import {CANVAS_RATIO, RECT_COUNT} from "../constants/constants";
 
 enum ColorFormats {
     HEX,
     RGBA
 }
 
-export function pickColor(ev: MouseEvent, canvas: HTMLCanvasElement, colorFormat = ColorFormats.RGBA) {
+export function pickColor(ev: MouseEvent, canvas: HTMLCanvasElement, canvasRatio = CANVAS_RATIO, colorFormat = ColorFormats.RGBA) {
     const bounding = canvas.getBoundingClientRect();
-    const x = ev.clientX - bounding.left;
-    const y = ev.clientY - bounding.top;
+    const x = (ev.clientX - bounding.left) * canvasRatio;
+    const y = (ev.clientY - bounding.top) * canvasRatio;
     const ctx = canvas.getContext("2d");
 
     if (ctx) {

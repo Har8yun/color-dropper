@@ -2,9 +2,9 @@ import {useContext, useEffect, useState} from "react";
 import {pickColor} from "../../../utils/colorHelper";
 import {ImageContext} from "../../../context/ImageContextProvider";
 
-export const useColorDetector = (canvas: HTMLCanvasElement | null) => {
+export const useColorDetector = (canvas: HTMLCanvasElement | null, canvasDropper: HTMLCanvasElement | null) => {
     const [hoveredColor, setHoveredColor] = useState("");
-    const {isColorDropperActive} = useContext(ImageContext);
+    const {isColorDropperActive, isAdvancedDropper} = useContext(ImageContext);
     const [colors, setColors] = useState<string[]>([]);
 
     useEffect(() => {
@@ -16,14 +16,14 @@ export const useColorDetector = (canvas: HTMLCanvasElement | null) => {
             }
         };
 
-        if (canvas && isColorDropperActive) {
-            canvas.addEventListener("mousemove", handler);
+        if (canvasDropper && (isColorDropperActive || isAdvancedDropper)) {
+            canvasDropper.addEventListener("mousemove", handler);
         }
 
         return () => {
-            canvas?.removeEventListener("mousemove", handler);
+            canvasDropper?.removeEventListener("mousemove", handler);
         }
-    }, [canvas, isColorDropperActive])
+    }, [canvas, canvasDropper, isColorDropperActive, isAdvancedDropper])
 
     return {
         hoveredColor,

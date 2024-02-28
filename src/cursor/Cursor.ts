@@ -7,15 +7,15 @@ export const getCursor = (fill = "#efefef", colors: string[] = []) => {
     for (let y = 0; y < PICKER_SIZE; y += RECT_SIZE) {
         for (let x = 0; x < PICKER_SIZE; x += RECT_SIZE) {
             const isCenter = x === y && x === CENTER_INDEX;
-            const stroke =  isCenter ? "black" : "grey";
-            const strokeWidth =  isCenter ? 2 : 1;
-            const visibleRectCurrentR = ((CENTER_INDEX - x)**2 + (CENTER_INDEX - y)**2)**(1/2);
+            const stroke = isCenter ? "black" : "grey";
+            const strokeWidth = isCenter ? 2 : 1;
+            const visibleRectCurrentR = ((CENTER_INDEX - x) ** 2 + (CENTER_INDEX - y) ** 2) ** (1 / 2);
             const visibility = visibleRectCurrentR <= CIRCLE_RECT_R ? "visible" : "hidden";
 
             if (isCenter) {
-                centerRect +=`<rect x="${x}" y="${y}" stroke-width="${strokeWidth}" stroke="${stroke}" width="${RECT_SIZE}" height="${RECT_SIZE}" fill="${colors[i] ?? 'transparent'}" />`;
+                centerRect += `<rect x="${x}" y="${y}" stroke-width="${strokeWidth}" stroke="${stroke}" width="${RECT_SIZE}" height="${RECT_SIZE}" fill="${colors[i] ?? 'transparent'}" />`;
             } else {
-                allRects +=`<rect visibility="${visibility}" x="${x}" y="${y}" stroke-width="${strokeWidth}" stroke="${stroke}" width="${RECT_SIZE}" height="${RECT_SIZE}" fill="${colors[i] ?? 'transparent'}" />`;
+                allRects += `<rect visibility="${visibility}" x="${x}" y="${y}" stroke-width="${strokeWidth}" stroke="${stroke}" width="${RECT_SIZE}" height="${RECT_SIZE}" fill="${colors[i] ?? 'transparent'}" />`;
             }
             i++;
         }

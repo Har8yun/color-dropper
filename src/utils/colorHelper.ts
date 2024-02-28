@@ -5,20 +5,31 @@ enum ColorFormats {
     RGBA
 }
 
-export function pickColor(ev: MouseEvent, canvas: HTMLCanvasElement, canvasRatio = CANVAS_RATIO, colorFormat = ColorFormats.RGBA) {
+export function pickColor(
+    ev: MouseEvent,
+    canvas: HTMLCanvasElement,
+    colorsSize = RECT_COUNT,
+    colorFormat = ColorFormats.RGBA,
+    canvasRatio = CANVAS_RATIO,
+) {
     const bounding = canvas.getBoundingClientRect();
     const x = (ev.clientX - bounding.left) * canvasRatio;
     const y = (ev.clientY - bounding.top) * canvasRatio;
     const ctx = canvas.getContext("2d");
 
     if (ctx) {
-        const pixelRect = ctx.getImageData(x, y, RECT_COUNT, RECT_COUNT);
+        const pixelRect = ctx.getImageData(x, y, colorsSize, colorsSize);
 
         const colors = [];
         const {data: rectData} = pixelRect;
-        for (let i = 0; i < rectData.length; i +=4) {
-            const currentColor = `rgba(${rectData[i]}, ${rectData[i+1]}, ${rectData[i+2]}, ${rectData[i+3] / 255})`;
-            colors.push(currentColor);
+
+        if (colorFormat === ColorFormats.RGBA) {
+            for (let i = 0; i < rectData.length; i += 4) {
+                const currentColor = `rgb(${rectData[i]}, ${rectData[i + 1]}, ${rectData[i + 2]})`;
+                colors.push(currentColor);
+            }
+        } else if(colorFormat === ColorFormats.HEX) {
+            //TODO - do converting here
         }
 
         return {

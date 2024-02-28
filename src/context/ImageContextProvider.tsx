@@ -31,7 +31,7 @@ export const ImageContextProvider = ({children}: ImageContextProviderType) => {
     const [selectedImage, setSelectedImage] = useState("");
     const [selectedColor, setSelectedColor] = useState("#fefefe");
     const [isColorDropperActive, setIsColorDropperActive] = useState(false);
-    const [isAdvancedDropper, setIsAdvancedDropper] = useState(false);
+    const [isAdvancedDropper, setIsAdvancedDropper] = useState(true);
 
     return (
         <ImageContext.Provider

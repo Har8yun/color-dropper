@@ -105,22 +105,26 @@ export class CanvasAdvancedCursor {
     }
 
     draw(color: string, colorsSet: string[]) {
-        this.clear();
-        this.drawBall(color, colorsSet);
-        this.x += this.vx;
-        this.y += this.vy;
+        const doAllStaff = () => {
+            this.clear();
+            this.drawBall(color, colorsSet);
+            this.x += this.vx;
+            this.y += this.vy;
 
-        if (
-            this.y + this.vy > this.canvas.height - this.radius ||
-            this.y + this.vy < this.radius
-        ) {
-            this.vy = -this.vy;
+            if (
+                this.y + this.vy > this.canvas.height - this.radius ||
+                this.y + this.vy < this.radius
+            ) {
+                this.vy = -this.vy;
+            }
+            if (
+                this.x + this.vx > this.canvas.width - this.radius ||
+                this.x + this.vx < this.radius
+            ) {
+                this.vx = -this.vx;
+            }
         }
-        if (
-            this.x + this.vx > this.canvas.width - this.radius ||
-            this.x + this.vx < this.radius
-        ) {
-            this.vx = -this.vx;
-        }
+
+        requestAnimationFrame(doAllStaff);
     }
 }

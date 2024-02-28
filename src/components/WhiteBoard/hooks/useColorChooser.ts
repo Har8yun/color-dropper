@@ -19,7 +19,7 @@ export const useColorChooser = (canvas: HTMLCanvasElement | null, canvasDropper:
         return () => {
             canvasDropper?.removeEventListener("click", handler);
         }
-    }, [canvasDropper, isColorDropperActive, isAdvancedDropper, setSelectedColor])
+    }, [canvasDropper, isColorDropperActive, isAdvancedDropper, setSelectedColor, canvas])
     
     
     return {

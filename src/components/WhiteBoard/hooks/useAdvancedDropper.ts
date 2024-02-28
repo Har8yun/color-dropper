@@ -14,7 +14,6 @@ export const useAdvancedDropper = (canvas: HTMLCanvasElement | null, canvasDropp
 
     const handler = useCallback((ev: MouseEvent) => {
         if (canvasDrawer && canvas) {
-            canvasDrawer.clear();
             const bounding = canvasDrawer.canvas.getBoundingClientRect();
             canvasDrawer.x = (ev.clientX - bounding.left) * CANVAS_RATIO;
             canvasDrawer.y = (ev.clientY - bounding.top) * CANVAS_RATIO;

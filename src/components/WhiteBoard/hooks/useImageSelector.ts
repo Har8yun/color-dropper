@@ -14,15 +14,12 @@ export const useImageSelector = (canvas: HTMLCanvasElement | null) => {
                 if (canvas) {
                     const ctx = canvas.getContext("2d");
                     if (ctx !== null) {
-
                         // TODO - image calculations for ratio and fit
                         const startX = 0;
                         const startY = 0;
                         const shrinkPercent = 1;
                         const width = img.width * shrinkPercent;
                         const height = img.height * shrinkPercent;
-                        img.height = height;
-                        img.width = width;
                         ctx.drawImage(img, startX, startY, width, height)
                     }
                 }

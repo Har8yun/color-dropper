@@ -6,7 +6,7 @@ import {ImageContext} from "../../context/ImageContextProvider";
 
 const AdvancedDropper = () => {
     const {isAdvancedDropper, setIsAdvancedDropper} = useContext(ImageContext);
-    const clickHandler = () => setIsAdvancedDropper(isActive => !isActive);
+    const clickHandler = () => setIsAdvancedDropper(!isAdvancedDropper);
 
     return (
         <Box sx={{marginBottom: "1rem"}}>

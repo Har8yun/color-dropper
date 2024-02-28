@@ -1,4 +1,5 @@
-import React, {createContext, SetStateAction, useState, Dispatch} from "react";
+import React, {createContext, useReducer, useCallback} from "react";
+import {APP_ACTIONS, colorDropperReducer, INITIAL_STATE} from "../reducers/colorDropperReducer";
 
 type ImageContextProviderType = {
     children: React.ReactNode
@@ -6,13 +7,13 @@ type ImageContextProviderType = {
 
 interface IImageContext {
     selectedImage: string;
-    setSelectedImage: Dispatch<SetStateAction<string>>;
+    setSelectedImage: (selectedImage: string) => void;
     isColorDropperActive: boolean,
-    setIsColorDropperActive: Dispatch<SetStateAction<boolean>>;
+    setIsColorDropperActive: (isColorDropperActive: boolean) => void;
     selectedColor: string,
-    setSelectedColor: Dispatch<SetStateAction<string>>;
+    setSelectedColor: (selectedColor: string) => void;
     isAdvancedDropper: boolean,
-    setIsAdvancedDropper: Dispatch<SetStateAction<boolean>>;
+    setIsAdvancedDropper:  (isAdvancedDropper: boolean) => void;
 }
 
 export const ImageContext = createContext<IImageContext>({
@@ -27,22 +28,27 @@ export const ImageContext = createContext<IImageContext>({
 })
 
 export const ImageContextProvider = ({children}: ImageContextProviderType) => {
-    // TODO - make reducer
-    const [selectedImage, setSelectedImage] = useState("");
-    const [selectedColor, setSelectedColor] = useState("#fefefe");
-    const [isColorDropperActive, setIsColorDropperActive] = useState(false);
-    const [isAdvancedDropper, setIsAdvancedDropper] = useState(true);
+    const [state, dispatch] = useReducer(colorDropperReducer, INITIAL_STATE);
+
+    const setSelectedImage = useCallback((selectedImage: string) => dispatch({type: APP_ACTIONS.SELECT_IMAGE, payload: {selectedImage}}),
+        []);
+    const setSelectedColor = useCallback((selectedColor: string) => dispatch({ type: APP_ACTIONS.SELECT_COLOR, payload: { selectedColor }}),
+        []);
+    const setIsColorDropperActive = useCallback((isColorDropperActive: boolean) => dispatch({ type: APP_ACTIONS.SET_COLOR_DROPPER, payload: { isColorDropperActive }}),
+        []);
+    const setIsAdvancedDropper = useCallback((isAdvancedDropper: boolean) => dispatch({ type: APP_ACTIONS.SET_ADVANCED_DROPPER, payload: { isAdvancedDropper }}),
+        []);
 
     return (
         <ImageContext.Provider
             value={{
-                selectedImage,
+                selectedImage: state.selectedImage,
                 setSelectedImage,
-                selectedColor,
+                selectedColor: state.selectedColor,
                 setSelectedColor,
-                isColorDropperActive,
+                isColorDropperActive: state.isColorDropperActive,
                 setIsColorDropperActive,
-                isAdvancedDropper,
+                isAdvancedDropper: state.isAdvancedDropper,
                 setIsAdvancedDropper,
             }}>
             {children}

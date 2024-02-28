@@ -10,11 +10,11 @@ import {ImageContext} from "../../context/ImageContextProvider";
 import "./WhiteBoard.css";
 
 const WhiteBoard = () => {
-    const { isAdvancedDropper } = useContext(ImageContext);
+    const { isAdvancedDropper, selectedColor } = useContext(ImageContext);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const canvasDropperRef = useRef<HTMLCanvasElement>(null);
     const {hoveredColor, colors} = useColorDetector(canvasRef.current, canvasDropperRef.current);
-    const {selectedColor} = useColorChooser(canvasRef.current, canvasDropperRef.current);
+    useColorChooser(canvasRef.current, canvasDropperRef.current);
     const cursorString = useCursorBuilder(selectedColor, colors)
     useImageSelector(canvasRef.current);
     useAdvancedDropper(canvasRef.current, canvasDropperRef.current)

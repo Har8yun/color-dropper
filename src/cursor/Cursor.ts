@@ -1,7 +1,6 @@
 import {CENTER_INDEX, CIRCLE_R, CIRCLE_RECT_R, PICKER_SIZE, RECT_SIZE} from "../constants/constants";
 
 export const getCursor = (fill = "#efefef", colors: string[] = []) => {
-    console.log("fill", fill)
     let allRects = "";
     let i = 0;
     let centerRect = ""
@@ -11,7 +10,7 @@ export const getCursor = (fill = "#efefef", colors: string[] = []) => {
             const stroke =  isCenter ? "black" : "grey";
             const strokeWidth =  isCenter ? 2 : 1;
             const visibleRectCurrentR = ((CENTER_INDEX - x)**2 + (CENTER_INDEX - y)**2)**(1/2);
-            const visibility = visibleRectCurrentR <= CIRCLE_RECT_R ? "visible" : "hidden";// = x === 0 || y === 0 || x === (PICKER_SIZE - RECT_SIZE) || y === (PICKER_SIZE - RECT_SIZE) ? "hidden" : "visible";
+            const visibility = visibleRectCurrentR <= CIRCLE_RECT_R ? "visible" : "hidden";
 
             if (isCenter) {
                 centerRect +=`<rect x="${x}" y="${y}" stroke-width="${strokeWidth}" stroke="${stroke}" width="${RECT_SIZE}" height="${RECT_SIZE}" fill="${colors[i] ?? 'transparent'}" />`;

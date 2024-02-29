@@ -8,26 +8,37 @@ import {useCursorBuilder} from "./hooks/useCursorBuilder";
 import {useAdvancedDropper} from "./hooks/useAdvancedDropper";
 import {ImageContext} from "../../context/ImageContextProvider";
 import "./WhiteBoard.css";
+import {useOffScreenCanvas} from "./hooks/useOffScreenCanvas";
 
 const WhiteBoard = () => {
     const { isAdvancedDropper, selectedColor } = useContext(ImageContext);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const canvasDropperRef = useRef<HTMLCanvasElement>(null);
+    const canvasOffRef = useRef<HTMLCanvasElement>(null);
     const {hoveredColor, colors} = useColorDetector(canvasRef.current, canvasDropperRef.current);
     useColorChooser(canvasRef.current, canvasDropperRef.current);
-    const cursorString = useCursorBuilder(selectedColor, colors)
+    const cursorString = useCursorBuilder(selectedColor, colors);
     useImageSelector(canvasRef.current);
-    useAdvancedDropper(canvasRef.current, canvasDropperRef.current)
+    useAdvancedDropper(canvasRef.current, canvasDropperRef.current);
+    /** IMPLEMENTS OFF SCREEN CANVAS WITH WEB WORKER **/
+    const {
+        isOffScreenDropper,
+        selectedColor: offScreenSelectedColor,
+        hoveredColor: offScreenHoveredColor,
+    } = useOffScreenCanvas(canvasOffRef.current, canvasRef.current)
+
+    const centerColor = isOffScreenDropper ? offScreenSelectedColor : (isAdvancedDropper ? selectedColor : "");
+    const movementColor = isOffScreenDropper ? offScreenHoveredColor : (isAdvancedDropper ? hoveredColor : "");
 
     return (
         <Box className="whiteBoard-container">
             <Box className="hovered-color"
                  style={{
-                     backgroundColor: hoveredColor,
-                     borderColor: selectedColor,
+                     backgroundColor: movementColor,
+                     borderColor: centerColor,
                  }}
             >
-                {hoveredColor}
+                {movementColor}
             </Box>
             <Box className="canvas-container">
                 <canvas
@@ -42,11 +53,23 @@ const WhiteBoard = () => {
                     height={CANVAS_SIZE}
                 />
                 <canvas
+                    id="canvas-off"
+                    style={{
+                        width: `${CANVAS_WIDTH}px`,
+                        height: `${CANVAS_WIDTH}px`,
+                        zIndex: isOffScreenDropper ? 9999 : 5,
+                    }}
+                    ref={canvasOffRef}
+                    width={CANVAS_SIZE}
+                    height={CANVAS_SIZE}
+                />
+                <canvas
                     id="canvas-dropper"
                     style={{
                         cursor: isAdvancedDropper ? "none" : cursorString,
                         width: `${CANVAS_WIDTH}px`,
                         height: `${CANVAS_WIDTH}px`,
+                        zIndex: isAdvancedDropper ? 9999 : 5,
                     }}
                     ref={canvasDropperRef}
                     width={CANVAS_SIZE}

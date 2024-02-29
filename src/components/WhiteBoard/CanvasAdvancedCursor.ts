@@ -1,9 +1,8 @@
-// TODO - optimaze performance and draw parts , track mouse movement speed
 export class CanvasAdvancedCursor {
     constructor(canvas: HTMLCanvasElement | null) {
         if (canvas) {
             this.canvas = canvas;
-            this.ctx = canvas.getContext("2d");
+            this.ctx = canvas.getContext("2d", {willReadFrequently: true});
         } else {
             throw Error("Canvas is Required")
         }

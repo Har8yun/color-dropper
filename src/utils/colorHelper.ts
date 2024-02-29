@@ -13,9 +13,9 @@ export function pickColor(
     canvasRatio = CANVAS_RATIO,
 ) {
     const bounding = canvas.getBoundingClientRect();
-    const x = (ev.clientX - bounding.left) * canvasRatio;
-    const y = (ev.clientY - bounding.top) * canvasRatio;
-    const ctx = canvas.getContext("2d");
+    const x = ~~((ev.clientX - bounding.left) * canvasRatio);
+    const y = ~~((ev.clientY - bounding.top) * canvasRatio);
+    const ctx = canvas.getContext("2d", { willReadFrequently : true });
 
     if (ctx) {
         const pixelRect = ctx.getImageData(x, y, colorsSize, colorsSize);

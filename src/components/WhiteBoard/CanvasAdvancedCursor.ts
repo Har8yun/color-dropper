@@ -11,10 +11,10 @@ export class CanvasAdvancedCursor {
 
     canvas;
     ctx;
-    x = 100;
-    y = 100;
-    vx = 5;
-    vy = 1;
+    x = 0;
+    y = 0;
+    vx = 0;
+    vy = 0;
     radius = 360;
     borderWidth = 40;
     borderEdgeColor = "#fff";

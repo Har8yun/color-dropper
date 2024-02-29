@@ -105,7 +105,7 @@ export class CanvasAdvancedCursor {
     }
 
     draw(color: string, colorsSet: string[]) {
-        const doAllStaff = () => {
+        const render = () => {
             this.clear();
             this.drawBall(color, colorsSet);
             this.x += this.vx;
@@ -125,6 +125,6 @@ export class CanvasAdvancedCursor {
             }
         }
 
-        requestAnimationFrame(doAllStaff);
+        requestAnimationFrame(render);
     }
 }

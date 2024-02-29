@@ -15,8 +15,8 @@ export const useAdvancedDropper = (canvas: HTMLCanvasElement | null, canvasDropp
     const handler = useCallback((ev: MouseEvent) => {
         if (canvasDrawer && canvas) {
             const bounding = canvasDrawer.canvas.getBoundingClientRect();
-            canvasDrawer.x = Math.floor((ev.clientX - bounding.left) * CANVAS_RATIO);
-            canvasDrawer.y = Math.floor((ev.clientY - bounding.top) * CANVAS_RATIO);
+            canvasDrawer.x = ~~((ev.clientX - bounding.left) * CANVAS_RATIO);
+            canvasDrawer.y = ~~((ev.clientY - bounding.top) * CANVAS_RATIO);
             const {centerColor, colorsSet} = pickColor(ev, canvas);
             canvasDrawer.draw(centerColor, colorsSet);
         }

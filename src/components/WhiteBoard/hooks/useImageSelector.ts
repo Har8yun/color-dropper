@@ -1,5 +1,6 @@
 import {useContext, useEffect} from "react";
 import {ImageContext} from "../../../context/ImageContextProvider";
+import {CANVAS_SIZE} from "../../../constants/constants";
 
 export const useImageSelector = (canvas: HTMLCanvasElement | null) => {
     const {selectedImage} = useContext(ImageContext);
@@ -12,14 +13,25 @@ export const useImageSelector = (canvas: HTMLCanvasElement | null) => {
 
             img.onload = () => {
                 if (canvas) {
-                    const ctx = canvas.getContext("2d");
+                    const ctx = canvas.getContext("2d", { willReadFrequently : true });
                     if (ctx !== null) {
-                        // TODO - image calculations for ratio and fit
                         const startX = 0;
                         const startY = 0;
-                        const shrinkPercent = 1;
-                        const width = img.width * shrinkPercent;
-                        const height = img.height * shrinkPercent;
+
+                        let shrink = 1
+                        if (img.width > img.height) {
+                            if (img.width > CANVAS_SIZE) {
+                                shrink = CANVAS_SIZE / img.width;
+                            }
+                        } else if (img.height > CANVAS_SIZE) {
+                            shrink = CANVAS_SIZE / img.height;
+                        }
+
+                        img.height = img.height * shrink;
+                        img.width = img.width * shrink;
+
+                        const width = img.width;
+                        const height = img.height;
                         ctx.drawImage(img, startX, startY, width, height)
                     }
                 }

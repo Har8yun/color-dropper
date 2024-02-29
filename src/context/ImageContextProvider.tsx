@@ -14,6 +14,8 @@ interface IImageContext {
     setSelectedColor: (selectedColor: string) => void;
     isAdvancedDropper: boolean,
     setIsAdvancedDropper:  (isAdvancedDropper: boolean) => void;
+    isOffScreenDropper: boolean,
+    setIsOffScreenDropper:  (isOffScreenDropper: boolean) => void;
 }
 
 export const ImageContext = createContext<IImageContext>({
@@ -25,18 +27,28 @@ export const ImageContext = createContext<IImageContext>({
     setSelectedColor: () => {},
     isAdvancedDropper: false,
     setIsAdvancedDropper: () => {},
+    isOffScreenDropper: false,
+    setIsOffScreenDropper: () => {},
 })
 
 export const ImageContextProvider = ({children}: ImageContextProviderType) => {
     const [state, dispatch] = useReducer(colorDropperReducer, INITIAL_STATE);
 
-    const setSelectedImage = useCallback((selectedImage: string) => dispatch({type: APP_ACTIONS.SELECT_IMAGE, payload: {selectedImage}}),
+    const setSelectedImage = useCallback((selectedImage: string) =>
+            dispatch({type: APP_ACTIONS.SELECT_IMAGE, payload: {selectedImage}}),
         []);
-    const setSelectedColor = useCallback((selectedColor: string) => dispatch({ type: APP_ACTIONS.SELECT_COLOR, payload: { selectedColor }}),
+    const setSelectedColor = useCallback((selectedColor: string) =>
+            dispatch({ type: APP_ACTIONS.SELECT_COLOR, payload: { selectedColor }}),
         []);
-    const setIsColorDropperActive = useCallback((isColorDropperActive: boolean) => dispatch({ type: APP_ACTIONS.SET_COLOR_DROPPER, payload: { isColorDropperActive }}),
+    const setIsColorDropperActive = useCallback((isColorDropperActive: boolean) =>
+            dispatch({ type: APP_ACTIONS.SET_COLOR_DROPPER, payload: { isColorDropperActive }}),
         []);
-    const setIsAdvancedDropper = useCallback((isAdvancedDropper: boolean) => dispatch({ type: APP_ACTIONS.SET_ADVANCED_DROPPER, payload: { isAdvancedDropper }}),
+    const setIsAdvancedDropper = useCallback((isAdvancedDropper: boolean) =>
+            dispatch({ type: APP_ACTIONS.SET_ADVANCED_DROPPER, payload: { isAdvancedDropper }}),
+        []);
+
+    const setIsOffScreenDropper = useCallback((isOffScreenDropper: boolean) =>
+            dispatch({ type: APP_ACTIONS.SET_OFF_SCREEN_DROPPER, payload: { isOffScreenDropper }}),
         []);
 
     return (
@@ -50,6 +62,8 @@ export const ImageContextProvider = ({children}: ImageContextProviderType) => {
                 setIsColorDropperActive,
                 isAdvancedDropper: state.isAdvancedDropper,
                 setIsAdvancedDropper,
+                isOffScreenDropper: state.isOffScreenDropper,
+                setIsOffScreenDropper,
             }}>
             {children}
         </ImageContext.Provider>

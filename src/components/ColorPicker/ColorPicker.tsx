@@ -4,6 +4,7 @@ import DefaultColorPicker from "./DefaultColorPicker";
 import SelectedColor from "./SelectedColor";
 import ProColorPicker from "./ProColorPicker";
 import AdvancedDropper from "./AdvancedDropper";
+import OffScreenDropper from "./OffScreenDropper";
 
 const ColorPicker = () => {
     return (
@@ -17,6 +18,8 @@ const ColorPicker = () => {
             <ProColorPicker/>
 
             <AdvancedDropper />
+
+            <OffScreenDropper />
 
             <SelectedColor/>
         </ToolWrapper>

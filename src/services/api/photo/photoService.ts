@@ -9,7 +9,6 @@ export const getPhotos = async () => {
         });
         return await response.json();
     } catch (er) {
-        console.log("er:", er)
         return { photos : []}
     }
 };
@@ -23,7 +22,6 @@ export const searchPhotos = async (query: string) => {
         });
         return await response.json();
     } catch (er) {
-        console.log("er:", er)
         return { photos : []}
     }
 };

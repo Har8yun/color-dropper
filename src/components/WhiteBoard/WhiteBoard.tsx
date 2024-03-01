@@ -9,10 +9,12 @@ import {useAdvancedDropper} from "./hooks/useAdvancedDropper";
 import {ImageContext} from "../../context/ImageContextProvider";
 import "./WhiteBoard.css";
 import {useOffScreenCanvas} from "./hooks/useOffScreenCanvas";
+import {useInitCanvas} from "./hooks/useInitCanvas";
 
 const WhiteBoard = () => {
     const { isAdvancedDropper, selectedColor } = useContext(ImageContext);
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    useInitCanvas(canvasRef);
     const canvasDropperRef = useRef<HTMLCanvasElement>(null);
     const canvasOffRef = useRef<HTMLCanvasElement>(null);
     const {hoveredColor, colors} = useColorDetector(canvasRef.current, canvasDropperRef.current);

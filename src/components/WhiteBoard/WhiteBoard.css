@@ -11,6 +11,10 @@
     box-sizing: border-box;
 }
 
+#canvas-off {
+    cursor: none;
+}
+
 #canvas-dropper {
     background-color: transparent;
 }

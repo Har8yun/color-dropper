@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import {RefObject, useContext, useEffect, useState} from "react";
 import {pickColor} from "../../../utils/colorHelper";
 import {ImageContext} from "../../../context/ImageContextProvider";
 
@@ -7,18 +7,19 @@ type TrackColor = {
     colors: string[],
 }
 
-export const useColorDetector = (canvas: HTMLCanvasElement | null, canvasDropper: HTMLCanvasElement | null) => {
+export const useColorDetector = (canvasRef: RefObject<HTMLCanvasElement>, canvasDropperRef: RefObject<HTMLCanvasElement>) => {
     const [{hoveredColor, colors}, setHoveredColor] = useState<TrackColor>({hoveredColor: "", colors: []});
     const {isColorDropperActive} = useContext(ImageContext);
 
     useEffect(() => {
         const handler = (ev: MouseEvent) => {
-            if (canvas) {
-                const {centerColor, colorsSet} = pickColor(ev, canvas);
+            if (canvasRef.current) {
+                const {centerColor, colorsSet} = pickColor(ev, canvasRef.current);
                 setHoveredColor({hoveredColor: centerColor, colors: colorsSet});
             }
         };
 
+        const canvasDropper = canvasDropperRef.current;
         if (canvasDropper && (isColorDropperActive)) {
             canvasDropper.addEventListener("mousemove", handler);
         }
@@ -26,7 +27,7 @@ export const useColorDetector = (canvas: HTMLCanvasElement | null, canvasDropper
         return () => {
             canvasDropper?.removeEventListener("mousemove", handler);
         }
-    }, [canvas, canvasDropper, isColorDropperActive])
+    }, [isColorDropperActive, canvasRef, canvasDropperRef])
 
     return {
         hoveredColor,

@@ -28,7 +28,7 @@ const WhiteBoard = () => {
     } = useOffScreenCanvas(canvasOffRef.current, canvasRef.current)
 
     const centerColor = isOffScreenDropper ? offScreenSelectedColor : (isAdvancedDropper ? selectedColor : "");
-    const movementColor = isOffScreenDropper ? offScreenHoveredColor : (isAdvancedDropper ? hoveredColor : "");
+    const movementColor = isOffScreenDropper ? offScreenHoveredColor : (isAdvancedDropper ? hoveredColor : hoveredColor);
 
     return (
         <Box className="whiteBoard-container">

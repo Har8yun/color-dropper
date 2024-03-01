@@ -23,18 +23,24 @@ export function pickColor(
         const colors = [];
         const {data: rectData} = pixelRect;
 
+        const hexColors = []
         if (colorFormat === ColorFormats.RGBA) {
             for (let i = 0; i < rectData.length; i += 4) {
-                const currentColor = `rgb(${rectData[i]}, ${rectData[i + 1]}, ${rectData[i + 2]})`;
+                // todo convert color to hex
+                const currentColor = `rgb(${rectData[i]} ${rectData[i + 1]} ${rectData[i + 2]} / ${rectData[3]})`;
+
+                const hex = rgbToHex(rectData[0], rectData[1], rectData[2]);
+
                 colors.push(currentColor);
+                hexColors.push(hex);
             }
         } else if(colorFormat === ColorFormats.HEX) {
             //TODO - do converting here
         }
-
+        // console.log("gexxxxx", hexColors)
         return {
-            colorsSet: colors,
-            centerColor: colors[Math.floor(colors.length / 2)]
+            colorsSet: hexColors,
+            centerColor: hexColors[Math.floor(colors.length / 2)]
         };
     }
 
@@ -42,4 +48,16 @@ export function pickColor(
         colorsSet: [],
         centerColor: ""
     };
+}
+
+export const rgbToHex = function rgbToHex(r: number, g: number, b: number) {
+    if (r > 255 || g > 255 || b > 255) {
+        throw Error("Invalid color component");
+    }
+
+    // TODO - check hex values
+    const rr = (r << 16)
+    console.log("rr", rr)
+
+    return `#${((r << 16) | (g << 8) | b).toString(16)}`;
 }

@@ -1,38 +1,50 @@
-import {useCallback, useContext, useEffect, useMemo} from "react";
+import {RefObject, useContext, useEffect, useState} from "react";
 import {ImageContext} from "../../../context/ImageContextProvider";
 import {CANVAS_RATIO} from "../../../constants/constants";
 import {pickColor} from "../../../utils/colorHelper";
 import {CanvasAdvancedCursor} from "../CanvasAdvancedCursor";
 
-export const useAdvancedDropper = (canvas: HTMLCanvasElement | null, canvasDropper: HTMLCanvasElement | null) => {
+export const useAdvancedDropper = (canvasRef: RefObject<HTMLCanvasElement>, canvasDropperRef: RefObject<HTMLCanvasElement>) => {
     const {isAdvancedDropper} = useContext(ImageContext);
-    const canvasDrawer = useMemo(() => canvasDropper && new CanvasAdvancedCursor(canvasDropper), [canvasDropper]);
-
-    const outHandler = useCallback(() => {
-        canvasDrawer?.clear()
-    }, [canvasDrawer])
-
-    const handler = useCallback((ev: MouseEvent) => {
-        if (canvasDrawer && canvas) {
-            const bounding = canvasDrawer.canvas.getBoundingClientRect();
-            canvasDrawer.x = ~~((ev.clientX - bounding.left) * CANVAS_RATIO);
-            canvasDrawer.y = ~~((ev.clientY - bounding.top) * CANVAS_RATIO);
-            const {centerColor, colorsSet} = pickColor(ev, canvas);
-            canvasDrawer.draw(centerColor, colorsSet);
-        }
-    }, [canvas, canvasDrawer])
+    const [hoveredColor, setHoveredColor] = useState("");
 
     useEffect(() => {
-        if (canvasDropper && isAdvancedDropper) {
-            canvasDropper.addEventListener("mousemove", handler);
-            canvasDropper.addEventListener("mouseout", outHandler);
-        }
+        const canvasDropper = canvasDropperRef.current;
 
-        return () => {
-            if (canvasDropper) {
-                canvasDropper.removeEventListener("mousemove", handler);
+        if (canvasDropper) {
+            const canvasDrawer = new CanvasAdvancedCursor(canvasDropper)
+
+            const outHandler = () => {
+                canvasDrawer?.clear()
+            };
+
+            const handler = (ev: MouseEvent) => {
+                if (canvasDropper && canvasRef.current) {
+                    const bounding = canvasDrawer.canvas.getBoundingClientRect();
+                    canvasDrawer.x = ~~((ev.clientX - bounding.left) * CANVAS_RATIO);
+                    canvasDrawer.y = ~~((ev.clientY - bounding.top) * CANVAS_RATIO);
+                    const {centerColor, colorsSet} = pickColor(ev, canvasRef.current);
+                    canvasDrawer.draw(centerColor, colorsSet);
+                    setHoveredColor(centerColor);
+                }
+            }
+
+            if (isAdvancedDropper) {
+                canvasDropper.addEventListener("mousemove", handler);
                 canvasDropper.addEventListener("mouseout", outHandler);
             }
+
+            return () => {
+                if (canvasDropper) {
+                    canvasDropper.removeEventListener("mousemove", handler);
+                    canvasDropper.addEventListener("mouseout", outHandler);
+                }
+            }
         }
-    }, [canvasDropper, handler, isAdvancedDropper, outHandler]);
+
+    }, [canvasDropperRef, canvasRef, isAdvancedDropper]);
+
+    return {
+        advancedHoverColor: hoveredColor,
+    }
 };

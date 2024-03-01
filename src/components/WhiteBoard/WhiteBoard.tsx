@@ -20,8 +20,8 @@ const WhiteBoard = () => {
     const {hoveredColor, colors} = useColorDetector(canvasRef, canvasDropperRef);
     useColorChooser(canvasRef, canvasDropperRef);
     const cursorString = useCursorBuilder(selectedColor, colors);
-    useImageSelector(canvasRef.current);
-    useAdvancedDropper(canvasRef.current, canvasDropperRef.current);
+    useImageSelector(canvasRef);
+    const {advancedHoverColor} = useAdvancedDropper(canvasRef, canvasDropperRef);
     /** IMPLEMENTS OFF SCREEN CANVAS WITH WEB WORKER **/
     const {
         isOffScreenDropper,
@@ -30,7 +30,7 @@ const WhiteBoard = () => {
     } = useOffScreenCanvas(canvasOffRef.current, canvasRef.current)
 
     const centerColor = isOffScreenDropper ? offScreenSelectedColor : (isAdvancedDropper ? selectedColor : "");
-    const movementColor = isOffScreenDropper ? offScreenHoveredColor : (isAdvancedDropper ? hoveredColor : hoveredColor);
+    const movementColor = isOffScreenDropper ? offScreenHoveredColor : (isAdvancedDropper ? advancedHoverColor : hoveredColor);
 
     return (
         <Box className="whiteBoard-container">

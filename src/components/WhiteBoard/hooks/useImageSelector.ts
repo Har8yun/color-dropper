@@ -1,8 +1,8 @@
-import {useContext, useEffect} from "react";
+import {RefObject, useContext, useEffect} from "react";
 import {ImageContext} from "../../../context/ImageContextProvider";
 import {CANVAS_SIZE} from "../../../constants/constants";
 
-export const useImageSelector = (canvas: HTMLCanvasElement | null) => {
+export const useImageSelector = (canvasRef: RefObject<HTMLCanvasElement>) => {
     const {selectedImage} = useContext(ImageContext);
 
     useEffect(() => {
@@ -12,8 +12,8 @@ export const useImageSelector = (canvas: HTMLCanvasElement | null) => {
             img.src = selectedImage;
 
             img.onload = () => {
-                if (canvas) {
-                    const ctx = canvas.getContext("2d", { willReadFrequently : true });
+                if (canvasRef.current) {
+                    const ctx = canvasRef.current.getContext("2d", {willReadFrequently: true});
                     if (ctx !== null) {
                         const startX = 0;
                         const startY = 0;
@@ -37,5 +37,5 @@ export const useImageSelector = (canvas: HTMLCanvasElement | null) => {
                 }
             }
         }
-    }, [canvas, selectedImage])
+    }, [canvasRef, selectedImage])
 }

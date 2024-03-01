@@ -1,5 +1,26 @@
 # color-dropper
-React Canvas color dropper
+# React Canvas color dropper
+
+### 1 Offscreen Color picker
+
+Offscreen Color picker is the richest one.
+It is implemented with multi layer and offscreen canvas. This allows to perform better.
+Besides, costly functionality is taken care by web  Worker.
+
+### 2 Advanced color picker
+
+Advanced color picker enables canvas based pointer cursor.
+Here for better performance is used multi layer canvases.
+
+### 3 Pro color picker
+
+Pro color picker replaces browser mouse with "color picker" svg. On each movement svg gets new colors
+of current canvas and uses internally.
+
+### 4. Easy dropper
+
+Easy dropper implemented with native EyeDropper. It is not supported by all browsers yet.
+Easy dropper works very smooth and it is able to select any color also out of browsers.
 
 ![App Screenshot](/public/app-page.png)
 

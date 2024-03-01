@@ -16,6 +16,7 @@ export class CanvasAdvancedCursor {
     vy = 0;
     radius = 360;
     borderWidth = 40;
+    centerSquareColor = "#000";
     borderEdgeColor = "#fff";
     borderOuter = this.radius + this.borderWidth / 2;
     borderOuterWidth = 20;
@@ -90,6 +91,16 @@ export class CanvasAdvancedCursor {
                 }
                 i++;
             }
+
+            //------ center square
+            const centerX = this.x - this.rectSize / 2;
+            const centerY = this.y - this.rectSize / 2;
+            this.ctx.beginPath();
+            this.ctx.strokeStyle = this.centerSquareColor;
+            this.ctx.lineWidth = 6;
+            this.ctx.strokeRect(centerX, centerY, this.rectSize, this.rectSize);
+            this.ctx.closePath();
+            //------ center square
 
             this.drawInnerBorder();
             this.drawMiddleBorder(color);

@@ -45,7 +45,6 @@ export const useOffScreenCanvas = (canvasOff: HTMLCanvasElement | null, canvasBo
                     const x = ~~((ev.clientX - bounding.left) * CANVAS_RATIO);
                     const y = ~~((ev.clientY - bounding.top) * CANVAS_RATIO);
                     const {centerColor, colorsSet} = pickColor(ev, canvasBoard);
-                    console.log("colorsSet", colorsSet.length)
                     // @ts-ignore
                     offScreenWorker.current.postMessage({coordinates: {x, y}, centerColor, colorsSet});
 

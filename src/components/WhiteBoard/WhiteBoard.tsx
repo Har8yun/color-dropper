@@ -18,7 +18,7 @@ const WhiteBoard = () => {
     const canvasDropperRef = useRef<HTMLCanvasElement>(null);
     const canvasOffRef = useRef<HTMLCanvasElement>(null);
     const {hoveredColor, colors} = useColorDetector(canvasRef.current, canvasDropperRef.current);
-    useColorChooser(canvasRef.current, canvasDropperRef.current);
+    useColorChooser(canvasRef, canvasDropperRef);
     const cursorString = useCursorBuilder(selectedColor, colors);
     useImageSelector(canvasRef.current);
     useAdvancedDropper(canvasRef.current, canvasDropperRef.current);

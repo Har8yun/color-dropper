@@ -1,27 +1,27 @@
-import {useContext, useEffect} from "react";
+import {RefObject, useContext, useEffect} from "react";
 import {pickColor} from "../../../utils/colorHelper";
 import {ImageContext} from "../../../context/ImageContextProvider";
 
-export const useColorChooser = (canvas: HTMLCanvasElement | null, canvasDropper: HTMLCanvasElement | null) => {
+export const useColorChooser = (canvasRef: RefObject<HTMLCanvasElement>, canvasDropperRef: RefObject<HTMLCanvasElement>) => {
     const {selectedColor, setSelectedColor, isColorDropperActive, isAdvancedDropper} = useContext(ImageContext);
 
     useEffect(() => {
         const handler = (ev: MouseEvent) => {
-            if (canvas) {
-                const {centerColor} = pickColor(ev, canvas);
+            if (canvasRef.current) {
+                const {centerColor} = pickColor(ev, canvasRef.current);
                 setSelectedColor(centerColor);
             }
         }
 
+        const canvasDropper = canvasDropperRef.current;
         if (canvasDropper && (isColorDropperActive || isAdvancedDropper)) {
             canvasDropper.addEventListener("click", handler);
         }
         return () => {
             canvasDropper?.removeEventListener("click", handler);
         }
-    }, [canvasDropper, isColorDropperActive, isAdvancedDropper, setSelectedColor, canvas])
-    
-    
+    }, [canvasDropperRef, canvasRef, isAdvancedDropper, isColorDropperActive, setSelectedColor])
+
     return {
         selectedColor
     }

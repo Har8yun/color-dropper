@@ -5,7 +5,7 @@ export const useInitCanvas = (canvasRef: RefObject<HTMLCanvasElement>) => {
 
     useEffect(() => {
         if (canvasRef.current) {
-            const ctx = canvasRef.current.getContext("2d");
+            const ctx = canvasRef.current.getContext("2d", {willReadFrequently: true});
             if (ctx) {
                 ctx.beginPath();
                 ctx.fillStyle = CANVAS_BACK_COLOR;

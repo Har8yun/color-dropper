@@ -16,7 +16,7 @@ export function pickColor(
         const {data: rectData} = pixelRect;
         const hexColors = [];
         for (let i = 0; i < rectData.length; i += 4) {
-            const hex = rgbToHex(rectData[0], rectData[1], rectData[2]);
+            const hex = rgbToHex(rectData[i], rectData[i+1], rectData[i+2]);
             hexColors.push(hex);
         }
 

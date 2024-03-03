@@ -24,9 +24,9 @@ const offScreenPointer = function () {
         borderEdgeColor = "#fff";
         centerSquareColor = "#000";
         borderOuter = this.radius + this.borderWidth / 2;
-        borderOuterWidth = 20;
-        borderInnerWidth = 20;
-        borderInner = 330;
+        borderOuterWidth = 10;
+        borderInnerWidth = 10;
+        borderInner = 335;
         rectSize = 40;
         strokeColor = "#efefef";
 
@@ -52,7 +52,13 @@ const offScreenPointer = function () {
                 this.ctx.beginPath();
                 this.ctx.lineWidth = this.borderWidth;
                 this.ctx.strokeStyle = color ?? this.strokeColor;
-                this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI);
+                this.ctx.stroke();
+                this.ctx.closePath();
+                this.ctx.beginPath();
+                this.ctx.lineWidth = this.borderWidth;
+                this.ctx.strokeStyle = this.strokeColor;
+                this.ctx.arc(this.x, this.y, this.radius, Math.PI, 0);
                 this.ctx.stroke();
                 this.ctx.closePath();
             }
@@ -81,21 +87,21 @@ const offScreenPointer = function () {
                 const startY = this.y - drawSize;
                 const endY = startY + 2 * drawSize;
 
-                for (let x = startX; x < endX; x += this.rectSize) {
-                    for (let y = startY; y < endY; y += this.rectSize) {
+                this.ctx.beginPath();
+                for (let y = startY; y < endY; y += this.rectSize) {
+                    for (let x = startX; x < endX; x += this.rectSize) {
                         const currentSize = ((this.x - this.rectSize / 2 - x) ** 2 + (this.y - this.rectSize / 2 - y) ** 2) ** (1 / 2);
                         if (currentSize <= this.radius) {
-                            this.ctx.beginPath();
                             this.ctx.fillStyle = colorsSet[i];
                             this.ctx.fillRect(x, y, this.rectSize, this.rectSize);
                             this.ctx.strokeStyle = this.strokeColor;
-                            this.ctx.lineWidth = 6;
-                            this.ctx.strokeRect(x, y, this.rectSize, this.rectSize);
-                            this.ctx.closePath();
+                            this.ctx.lineWidth = 1;
+                            this.ctx.strokeRect(x, y, this.rectSize-1, this.rectSize-1);
                         }
+                        i++;
                     }
-                    i++;
                 }
+                this.ctx.closePath();
 
                 //------ center square
                 const centerX = this.x - this.rectSize / 2;

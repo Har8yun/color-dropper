@@ -21,7 +21,6 @@ const offScreenPointer = function () {
         vy = 0;
         radius = 360;
         borderWidth = 40;
-        borderEdgeColor = "#fff";
         centerSquareColor = "#000";
         borderOuter = this.radius + this.borderWidth / 2;
         borderOuterWidth = 10;
@@ -37,7 +36,7 @@ const offScreenPointer = function () {
             if (this.ctx) {
                 this.ctx.beginPath();
                 this.ctx.lineWidth = this.borderInnerWidth;
-                this.ctx.strokeStyle = this.borderEdgeColor;
+                this.ctx.strokeStyle = this.strokeColor;
                 this.ctx.arc(this.x, this.y, this.borderInner, 0, Math.PI * 2);
                 this.ctx.stroke();
                 this.ctx.closePath();
@@ -71,7 +70,7 @@ const offScreenPointer = function () {
             if (this.ctx) {
                 this.ctx.beginPath();
                 this.ctx.lineWidth = this.borderOuterWidth;
-                this.ctx.strokeStyle = this.borderEdgeColor;
+                this.ctx.strokeStyle = this.strokeColor;
                 this.ctx.arc(this.x, this.y, this.borderOuter, 0, Math.PI * 2);
                 this.ctx.stroke();
                 this.ctx.closePath();

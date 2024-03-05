@@ -5,7 +5,7 @@ import React, {useContext} from "react";
 import {ImageContext} from "../../../context/ImageContextProvider";
 
 const UploadImage = () => {
-    const { setSelectedImage } = useContext(ImageContext);
+    const { setSelectedImage, PhotoIndexedDBInstance } = useContext(ImageContext);
 
     const handleImage = (ev: React.ChangeEvent<HTMLInputElement>) => {
         const reader = new FileReader();
@@ -18,6 +18,7 @@ const UploadImage = () => {
 
         if (ev.target.files) {
             reader.readAsDataURL(ev.target.files[0]);
+            PhotoIndexedDBInstance.addPhoto(ev.target.files[0]);
         }
     }
 

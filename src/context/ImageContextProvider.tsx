@@ -1,5 +1,6 @@
 import React, {createContext, useReducer, useCallback} from "react";
 import {APP_ACTIONS, colorDropperReducer, INITIAL_STATE} from "../reducers/colorDropperReducer";
+import PhotoIndexedDBInstance, {PhotoIndexedDB} from "../services/IndexedDB/PhotoIndexedDB";
 
 type ImageContextProviderType = {
     children: React.ReactNode
@@ -16,6 +17,7 @@ interface IImageContext {
     setIsAdvancedDropper:  (isAdvancedDropper: boolean) => void;
     isOffScreenDropper: boolean,
     setIsOffScreenDropper:  (isOffScreenDropper: boolean) => void;
+    PhotoIndexedDBInstance: PhotoIndexedDB,
 }
 
 export const ImageContext = createContext<IImageContext>({
@@ -29,6 +31,7 @@ export const ImageContext = createContext<IImageContext>({
     setIsAdvancedDropper: () => {},
     isOffScreenDropper: false,
     setIsOffScreenDropper: () => {},
+    PhotoIndexedDBInstance: {} as PhotoIndexedDB,
 })
 
 export const ImageContextProvider = ({children}: ImageContextProviderType) => {
@@ -64,6 +67,7 @@ export const ImageContextProvider = ({children}: ImageContextProviderType) => {
                 setIsAdvancedDropper,
                 isOffScreenDropper: state.isOffScreenDropper,
                 setIsOffScreenDropper,
+                PhotoIndexedDBInstance,
             }}>
             {children}
         </ImageContext.Provider>

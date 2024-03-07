@@ -4,6 +4,7 @@ import ImagesTank from "../components/ImagesTank/ImagesTank";
 import ColorPicker from "../components/ColorPicker/ColorPicker";
 import {APP_ROUTER} from "../context/constants";
 import NotFound from "../pages/NotFound";
+import WebglWrapper from "../Webgl/WebglWrapper";
 
 const AppRouter = () => {
     return (
@@ -14,6 +15,7 @@ const AppRouter = () => {
 
                 <Route path="*" element={<NotFound/>}/>
             </Route>
+            <Route path={APP_ROUTER.WEBGL} element={<WebglWrapper />} />
         </Routes>
     );
 };

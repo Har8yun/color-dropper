@@ -30,7 +30,7 @@ const fsSource = `
     }
   `;
 
-let squareRotation = 0.0;
+let cubeRotation = 0.0;
 let deltaTime = 0;
 
 export const useWebgl = () => {
@@ -81,8 +81,8 @@ export const useWebgl = () => {
                     now *= 0.001; // convert to seconds
                     deltaTime = now - then;
                     then = now;
-                    drawScene(gl, programInfo, buffers, squareRotation);
-                    squareRotation += deltaTime;
+                    drawScene(gl, programInfo, buffers, cubeRotation);
+                    cubeRotation += deltaTime;
 
                     requestAnimationFrame(render);
                 }
